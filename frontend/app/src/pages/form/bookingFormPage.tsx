@@ -2,40 +2,41 @@
 import styles from '../../styles/bookingForm.module.css';
 import { useState } from 'react';
 
-const BookingFormPage = () => {
+const BookingForm = () => {
   const [formData, setFormData] = useState({
     service: '',
     doctor_name: '',
     start_time: '',
     end_time: '',
-    date: '',
+    date: ''
   });
   const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/bookings', {
+      const response = await fetch('http://host.docker.internal:5000/api/bookings' , {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
       });
-
       if (response.ok) {
         setMessage('Booking inserted successfully');
       } else {
+  
+        
         setMessage('Error inserting booking');
-        console.error('Error inserting booking:', response.statusText);
       }
     } catch (error) {
-      setMessage('Error inserting booking');
       console.error('Error inserting booking:', error);
+      setMessage('Internal Server Error');
     }
   };
 
@@ -75,4 +76,4 @@ const BookingFormPage = () => {
   );
 };
 
-export default BookingFormPage;
+export default BookingForm;
