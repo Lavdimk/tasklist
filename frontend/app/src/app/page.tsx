@@ -21,7 +21,7 @@ const Home: React.FC = async () => {
 
   let bookings = await getBookings();
 
-  console.log(bookings);
+
 
   bookings = bookings.map(value => {
     value.date = new Date(value.date).toDateString();

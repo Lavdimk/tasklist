@@ -1,8 +1,9 @@
-
 import styles from '../../styles/bookingForm.module.css';
 import { useState } from 'react';
+import { useRouter } from "next/router"
 
 const BookingForm = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     service: '',
     doctor_name: '',
@@ -29,9 +30,8 @@ const BookingForm = () => {
       });
       if (response.ok) {
         setMessage('Booking inserted successfully');
+        await router.push("/");
       } else {
-  
-        
         setMessage('Error inserting booking');
       }
     } catch (error) {
