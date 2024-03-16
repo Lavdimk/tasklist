@@ -21,7 +21,9 @@ const BookingForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://host.docker.internal:5000/api/bookings' , {
+      //http://host.docker.internal:5000/api/bookings
+      // Used 'localhost' instead of 'host.docker.internal' due to connection issues with the server.
+      const response = await fetch('http://localhost:5000/api/bookings' , {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
